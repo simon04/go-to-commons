@@ -27,6 +27,8 @@ Usage of ./go-to-commons:
         Wikitext of media file on Wikimedia Commons or (if specified as @file.txt, the text is read from file.txt)
   -username string
         Wikimedia username (default "$MEDIAWIKI_USERNAME")
+  -version
+        Display version information
 ```
 
 ## Open Source Libraries

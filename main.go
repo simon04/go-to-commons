@@ -13,8 +13,12 @@ import (
 	"cgt.name/pkg/go-mwclient"
 )
 
-const useragent = "go-to-commons"
+// https://goreleaser.com/cookbooks/usixng-main.version
+var version = "dev"
+var date = "unknown"
+var useragent = "go-to-commons " + version
 
+var showVersion = flag.Bool("version", false, "Display version information")
 var api = flag.String("api", "https://commons.wikimedia.org/w/api.php", "MediaWiki API URL")
 var username = flag.String("username", os.Getenv("MEDIAWIKI_USERNAME"), "Wikimedia username")
 var password = flag.String("password", os.Getenv("MEDIAWIKI_PASSWORD"), "Wikimedia password")
@@ -25,6 +29,13 @@ var text = flag.String("text", "", "Wikitext of media file on Wikimedia Commons 
 
 func main() {
 	flag.Parse()
+	if *showVersion {
+		fmt.Printf("go-to-commons %s\n", version)
+		fmt.Printf("Release-Date: %s\n", date)
+		fmt.Printf("Author: %s\n", "simon04")
+		fmt.Printf("License: %s\n", "GPLv3")
+		return
+	}
 	if *file == "" {
 		panic("-file needs to be specified!")
 	} else if *text == "" {
