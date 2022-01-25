@@ -118,12 +118,9 @@ func (v Values) EncodeMultipart() (data string, contentType string, err error) {
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
 
-	var token bool
-
 	keys := v.sortKeys()
 	for _, paramName := range keys {
-		if paramName == "token" {
-			token = true
+		if paramName == "token" || paramName == "file" {
 			continue
 		}
 		if v[paramName] != "" {
@@ -135,12 +132,20 @@ func (v Values) EncodeMultipart() (data string, contentType string, err error) {
 		}
 	}
 
-	if token {
+	if file, ok := v["file"]; ok {
+		part, err := writer.CreateFormFile("file", v["filename"])
+		if err != nil {
+			return "", "", err
+		}
+		part.Write([]byte(file))
+	}
+
+	if token, ok := v["token"]; ok {
 		part, err := writer.CreateFormField("token")
 		if err != nil {
 			return "", "", err
 		}
-		part.Write([]byte(v["token"]))
+		part.Write([]byte(token))
 	}
 
 	writer.Close()
