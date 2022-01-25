@@ -68,7 +68,7 @@ func main() {
 	}
 
 	fmt.Printf("Uploading %s as %s to %s...\n", *file, *filename, *api)
-	w.Post(map[string]string{
+	_, err = w.Post(map[string]string{
 		"action":   "upload",
 		"comment":  *comment,
 		"file":     string(bytes),
@@ -77,5 +77,8 @@ func main() {
 		"text":     *text,
 		"token":    token,
 	})
+	if err != nil {
+		panic(err)
+	}
 	fmt.Printf("Finished successfully :-)\n")
 }
