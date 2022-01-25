@@ -1,0 +1,10 @@
+# cgt.name/pkg/go-mwclient v1.2.0
+## explicit
+cgt.name/pkg/go-mwclient
+cgt.name/pkg/go-mwclient/params
+# github.com/antonholmquist/jason v1.0.0
+## explicit
+github.com/antonholmquist/jason
+# github.com/mrjones/oauth v0.0.0-20190623134757-126b35219450
+## explicit
+github.com/mrjones/oauth
