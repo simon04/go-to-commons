@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"strconv"
 	"strings"
 
 	"cgt.name/pkg/go-mwclient"
@@ -26,6 +27,7 @@ var comment = flag.String("comment", "Uploaded with "+useragent, "Upload comment
 var file = flag.String("file", "", "Media file to upload")
 var filename = flag.String("filename", "", "Filename on Wikimedia Commons")
 var text = flag.String("text", "", "Wikitext of media file on Wikimedia Commons or (if specified as @file.txt, the text is read from file.txt)")
+var overwrite = flag.Bool("overwrite", false, "Overwrite existing file on Wikimedia Commons")
 
 func main() {
 	flag.Parse()
@@ -88,13 +90,14 @@ func main() {
 
 	fmt.Printf("Uploading %s as %s to %s...\n", *file, *filename, *api)
 	_, err = w.Post(map[string]string{
-		"action":   "upload",
-		"comment":  *comment,
-		"file":     string(bytes),
-		"filename": *filename,
-		"format":   "json",
-		"text":     *text,
-		"token":    token,
+		"action":         "upload",
+		"comment":        *comment,
+		"file":           string(bytes),
+		"filename":       *filename,
+		"format":         "json",
+		"ignorewarnings": strconv.FormatBool(*overwrite),
+		"text":           *text,
+		"token":          token,
 	})
 	if err != nil {
 		panic(err)

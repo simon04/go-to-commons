@@ -21,6 +21,8 @@ Usage of ./go-to-commons:
         Media file to upload
   -filename string
         Filename on Wikimedia Commons
+  -overwrite
+        Overwrite existing file on Wikimedia Commons
   -password string
         Wikimedia password (default "$MEDIAWIKI_PASSWORD")
   -text string
