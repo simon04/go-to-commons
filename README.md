@@ -4,6 +4,8 @@ Upload media files to Wikimedia Commons.
 
 ## Usage
 
+Tip: [Create a bot password](https://commons.wikimedia.org/wiki/Special:BotPasswords?wpappId=go-to-commons) instead of using your main Wikimedia password!
+
 ```sh
 $ go-to-commons -username $MEDIAWIKI_USERNAME -password $MEDIAWIKI_PASSWORD -file go-to-commons.png -filename go-to-commons.png -text "=={{int:filedesc}}==\n..."
 ```
