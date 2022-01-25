@@ -21,7 +21,7 @@ var password = flag.String("password", os.Getenv("MEDIAWIKI_PASSWORD"), "Wikimed
 var comment = flag.String("comment", "Uploaded with "+useragent, "Upload comment")
 var file = flag.String("file", "", "Media file to upload")
 var filename = flag.String("filename", "", "Filename on Wikimedia Commons")
-var text = flag.String("text", "", "Wikitext of media file on Wikimedia Commons")
+var text = flag.String("text", "", "Wikitext of media file on Wikimedia Commons or (if specified as @file.txt, the text is read from file.txt)")
 
 func main() {
 	flag.Parse()
@@ -58,7 +58,15 @@ func main() {
 		panic(err)
 	}
 
-	if strings.HasPrefix(*text, "base64:") {
+	if strings.HasPrefix(*text, "@") {
+		base := (*text)[len("@"):]
+		fmt.Printf("Reading description text from file %s...\n", base)
+		bytes, err := ioutil.ReadFile(base)
+		if err != nil {
+			panic(err)
+		}
+		*text = string(bytes)
+	} else if strings.HasPrefix(*text, "base64:") {
 		base := (*text)[len("base64:"):]
 		bytes, err := base64.StdEncoding.DecodeString(base)
 		if err != nil {

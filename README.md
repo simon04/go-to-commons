@@ -24,7 +24,7 @@ Usage of ./go-to-commons:
   -password string
         Wikimedia password (default "$MEDIAWIKI_PASSWORD")
   -text string
-        Wikitext of media file on Wikimedia Commons
+        Wikitext of media file on Wikimedia Commons or (if specified as @file.txt, the text is read from file.txt)
   -username string
         Wikimedia username (default "$MEDIAWIKI_USERNAME")
 ```
